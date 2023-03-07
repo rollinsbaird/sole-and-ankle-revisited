@@ -21,7 +21,9 @@ const Header = () => {
     <header>
       <SuperHeader />
       <MainHeader>
-        <Logo />
+        <LogoWrapper>
+          <Logo />
+        </LogoWrapper>
         <DesktopNav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
@@ -39,11 +41,12 @@ const Header = () => {
             <Icon id="search" />
             <VisuallyHidden>Search</VisuallyHidden>
           </UnstyledButton>
-          <UnstyledButton>
+          <UnstyledButton onClick={() => setShowMobileMenu(true)}>
             <Icon id="menu" />
             <VisuallyHidden>Open menu</VisuallyHidden>
           </UnstyledButton>
         </MobileNav>
+        <Filler />
       </MainHeader>
 
       <MobileMenu
@@ -68,7 +71,8 @@ const MainHeader = styled.div`
   }
 
   @media ${QUERIES.phoneAndDown} {
-    padding: 18px 16px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 `;
 
@@ -97,6 +101,22 @@ const MobileNav = styled.div`
 
 const ShoppingBagButton = styled(UnstyledButton)`
   transform: translateX(-2px);
+`;
+
+const LogoWrapper = styled.div`
+  flex: 1;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    flex: revert;
+  }
+`;
+
+const Filler = styled.div`
+  flex: 1;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    display: none;
+  }
 `;
 
 const NavLink = styled.a`
