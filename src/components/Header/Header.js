@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-import { COLORS, WEIGHTS, QUERIES } from "../../constants";
+import { WEIGHTS, QUERIES } from "../../constants";
 import Icon from "../Icon";
 import UnstyledButton from "../UnstyledButton";
 import Logo from "../Logo";
