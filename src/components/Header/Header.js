@@ -1,10 +1,13 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
 
-import { COLORS, WEIGHTS } from '../../constants';
-import Logo from '../Logo';
-import SuperHeader from '../SuperHeader';
-import MobileMenu from '../MobileMenu';
+import { COLORS, WEIGHTS, QUERIES } from "../../constants";
+import Icon from "../Icon";
+import UnstyledButton from "../UnstyledButton";
+import Logo from "../Logo";
+import SuperHeader from "../SuperHeader";
+import MobileMenu from "../MobileMenu";
+import VisuallyHidden from "../VisuallyHidden";
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -18,18 +21,29 @@ const Header = () => {
     <header>
       <SuperHeader />
       <MainHeader>
-        <Side>
-          <Logo />
-        </Side>
-        <Nav>
+        <Logo />
+        <DesktopNav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
-        </Nav>
-        <Side />
+        </DesktopNav>
+        <MobileNav>
+          <ShoppingBagButton>
+            <Icon id="shopping-bag" />
+            <VisuallyHidden>Open cart</VisuallyHidden>
+          </ShoppingBagButton>
+          <UnstyledButton>
+            <Icon id="search" />
+            <VisuallyHidden>Search</VisuallyHidden>
+          </UnstyledButton>
+          <UnstyledButton>
+            <Icon id="menu" />
+            <VisuallyHidden>Open menu</VisuallyHidden>
+          </UnstyledButton>
+        </MobileNav>
       </MainHeader>
 
       <MobileMenu
@@ -46,16 +60,43 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+
+  @media ${QUERIES.tabletAndDown} {
+    justify-content: space-between;
+    align-items: center;
+    border-top: 4px solid ${COLORS.gray[900]};
+  }
+
+  @media ${QUERIES.phoneAndDown} {
+    padding: 18px 16px;
+  }
 `;
 
-const Nav = styled.nav`
+const DesktopNav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
+
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
 `;
 
-const Side = styled.div`
-  flex: 1;
+const MobileNav = styled.div`
+  display: none;
+
+  @media ${QUERIES.tabletAndDown} {
+    gap: 32px;
+    display: flex;
+  }
+
+  @media ${QUERIES.phoneAndDown} {
+    gap: 16px;
+  }
+`;
+
+const ShoppingBagButton = styled(UnstyledButton)`
+  transform: translateX(-2px);
 `;
 
 const NavLink = styled.a`
